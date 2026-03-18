@@ -30,7 +30,8 @@ var config = {
 
     hosts: {
         // XMPP domain.
-        domain: 'jitsi-meet.example.com',
+       // domain: 'jitsi-meet.example.com',
+          domain: 'localhost',
 
         // When using authentication, domain for guest users.
         // anonymousdomain: 'guest.example.com',
@@ -39,18 +40,20 @@ var config = {
         // authdomain: 'jitsi-meet.example.com',
 
         // Focus component domain. Defaults to focus.<domain>.
-        // focus: 'focus.jitsi-meet.example.com',
+         focus: 'focus.localhost',
 
         // XMPP MUC domain. FIXME: use XEP-0030 to discover it.
-        muc: 'conference.' + subdomain + 'jitsi-meet.example.com',
+        //muc: 'conference.' + subdomain + 'jitsi-meet.example.com',
+        muc: 'conference.localhost'
     },
 
     // BOSH URL. FIXME: use XEP-0156 to discover it.
-    bosh: 'https://jitsi-meet.example.com/' + subdir + 'http-bind',
+    //bosh: 'https://jitsi-meet.example.com/' + subdir + 'http-bind',
+    bosh: 'http://localhost:5280/http-bind',
 
     // Websocket URL (XMPP)
-    websocket: 'wss://jitsi-meet.example.com/' + subdir + 'xmpp-websocket',
-
+    //websocket: 'wss://jitsi-meet.example.com/' + subdir + 'xmpp-websocket',
+     websocket: 'ws://localhost:5280/xmpp-websocket',
     // websocketKeepAliveUrl: 'https://jitsi-meet.example.com/' + subdir + '_unlock',
 
     // Whether BOSH should be preferred over WebSocket if both are configured.
@@ -343,9 +346,9 @@ var config = {
     // util#browser#usesNewGumFlow. The constraints are independent from
     // this config's resolution value. Defaults to requesting an ideal
     // resolution of 720p.
-    constraints: {
+   /* constraints: {
       video: false
-     },
+     },*/
     // },
 
     // Enable / disable simulcast support.
@@ -357,6 +360,12 @@ var config = {
     // Start calls with video muted. Unlike the option above, this one is only
     // applied locally. FIXME: having these 2 options is confusing.
      startWithVideoMuted: true,
+     videoQuality: {
+     disabled: true
+     },
+    constraints: {
+    video: false
+    },
 
     // Desktop sharing
 

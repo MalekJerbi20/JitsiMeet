@@ -50,6 +50,8 @@
     "@vladmandic/human-models": "2.5.9",
     "@xmldom/xmldom": "0.8.7",
     "abab": "2.0.6",
+    "ajv": "^8.18.0",
+    "ajv-keywords": "^5.1.0",
     "allure-commandline": "2.32.0",
     "amplitude-js": "8.21.9",
     "base64-js": "1.5.1",

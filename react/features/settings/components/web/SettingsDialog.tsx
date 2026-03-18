@@ -169,7 +169,7 @@ function _mapStateToProps(state: IReduxState, ownProps: any) {
             submit: (newState: any) => submitAudioDeviceSelectionTab(newState, isDisplayedOnWelcomePage),
             icon: IconVolumeUp
         });
-        !_iAmVisitor && tabs.push({
+        /*!_iAmVisitor && tabs.push({
             name: SETTINGS_TABS.VIDEO,
             component: VideoDeviceSelection,
             labelKey: 'settings.video',
@@ -190,7 +190,7 @@ function _mapStateToProps(state: IReduxState, ownProps: any) {
             },
             submit: (newState: any) => submitVideoDeviceSelectionTab(newState, isDisplayedOnWelcomePage),
             icon: IconVideo
-        });
+        });*/
     }
 
     if (virtualBackgroundSupported && !_iAmVisitor && enableVirtualBackground) {

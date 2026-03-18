@@ -165,7 +165,8 @@ export function groupDevicesByKind(devices: MediaDeviceInfo[]): IDevicesState['a
     return {
         audioInput: devices.filter(device => device.kind === 'audioinput'),
         audioOutput: devices.filter(device => device.kind === 'audiooutput'),
-        videoInput: devices.filter(device => device.kind === 'videoinput')
+         videoInput: []
+        // videoInput: devices.filter(device => device.kind === 'videoinput')
     };
 }
 
@@ -238,7 +239,7 @@ export function areDevicesDifferent(devices1: MediaDeviceInfo[] = [], devices2: 
  */
 export function flattenAvailableDevices(
         { audioInput = [], audioOutput = [], videoInput = [] }: IDevicesState['availableDevices']) {
-    return audioInput.concat(audioOutput).concat(videoInput);
+    return  audioInput.concat(audioOutput);
 }
 
 /**
@@ -302,8 +303,10 @@ export function getAudioOutputDeviceData(state: IReduxState) {
  * @returns {string[]}
  */
 export function getVideoDeviceIds(state: IReduxState) {
-    return state['features/base/devices'].availableDevices.videoInput?.map(({ deviceId }) => deviceId);
+    //return state['features/base/devices'].availableDevices.videoInput?.map(({ deviceId }) => deviceId);
+     return [];
 }
+
 
 /**
  * Converts an array of device info objects into string.

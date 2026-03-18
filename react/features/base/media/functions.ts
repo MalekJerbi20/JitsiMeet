@@ -85,7 +85,8 @@ export function getStartWithAudioMuted(stateful: IStateful) {
  * @returns {boolean} - The computed startWithVideoMuted value that will be used.
  */
 export function getStartWithVideoMuted(stateful: IStateful) {
-    return Boolean(getPropertyValue(stateful, 'startWithVideoMuted', START_WITH_AUDIO_VIDEO_MUTED_SOURCES));
+    //return Boolean(getPropertyValue(stateful, 'startWithVideoMuted', START_WITH_AUDIO_VIDEO_MUTED_SOURCES));
+     return true ;
 }
 
 /**
@@ -129,13 +130,22 @@ export function isVideoMutedByUser(stateful: IStateful) {
  * @returns {boolean} True if the specified videoTrack should be rendered;
  * otherwise, false.
  */
-export function shouldRenderVideoTrack(
-        videoTrack: { muted: boolean; videoStarted: boolean; } | undefined,
+/*export function shouldRenderVideoTrack()
+       videoTrack: { muted: boolean; videoStarted: boolean; } | undefined,
         waitForVideoStarted: boolean) {
     return (
         videoTrack
             && !videoTrack.muted
             && (!waitForVideoStarted || videoTrack.videoStarted));
+            {
+                return false;
+           }*/
+
+export function shouldRenderVideoTrack(
+    videoTrack: { muted: boolean; videoStarted: boolean; } | undefined,
+    waitForVideoStarted: boolean
+) {
+    return false;
 }
 
 /**
