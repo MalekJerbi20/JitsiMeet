@@ -30,15 +30,15 @@ export const THRESHOLDS = [
     },
     {
         width: 565,
-        order: [ 'microphone', 'desktop', 'chat', 'raisehand', 'reactions', 'participants-pane', 'tileview' ]
+        order: [ 'microphone', 'desktop', 'chat', 'translate', 'raisehand', 'reactions', 'participants-pane', 'tileview' ]
     },
     {
         width: 520,
-        order: [ 'microphone',  'desktop', 'chat', 'raisehand', 'participants-pane', 'tileview' ]
+        order: [ 'microphone',  'desktop', 'chat', 'translate', 'raisehand', 'participants-pane', 'tileview' ]
     },
     {
         width: 470,
-        order: [ 'microphone',  'desktop', 'chat', 'raisehand', 'participants-pane' ]
+        order: [ 'microphone',  'desktop', 'chat','translate' ,'raisehand', 'participants-pane' ]
     },
     {
         width: 420,
@@ -64,23 +64,23 @@ export const THRESHOLDS = [
 export const NATIVE_THRESHOLDS = [
     {
         width: 560,
-        order: [ 'microphone',  'chat', 'desktop', 'raisehand', 'tileview', 'overflowmenu', 'hangup' ]
+        order: [ 'microphone',  'chat','translate', 'desktop', 'raisehand', 'tileview', 'overflowmenu', 'hangup' ]
     },
     {
         width: 500,
-        order: [ 'microphone', 'chat', 'raisehand', 'tileview', 'overflowmenu', 'hangup' ]
+        order: [ 'microphone', 'chat', 'translate', 'raisehand', 'tileview', 'overflowmenu', 'hangup' ]
     },
     {
         width: 440,
-        order: [ 'microphone', 'chat', 'raisehand', 'overflowmenu', 'hangup' ]
+        order: [ 'microphone', 'chat', 'translate', 'raisehand', 'overflowmenu', 'hangup' ]
     },
     {
         width: 380,
-        order: [ 'microphone',  'chat', 'overflowmenu', 'hangup' ]
+        order: [ 'microphone',  'chat', 'translate', 'overflowmenu', 'hangup' ]
     },
     {
         width: 320,
-        order: [ 'microphone','overflowmenu', 'hangup' ]
+        order: [ 'microphone','translate', 'overflowmenu', 'hangup' ]
     }
 ];
 
@@ -92,6 +92,7 @@ export const MAIN_TOOLBAR_BUTTONS_PRIORITY = [
     'microphone',
     'desktop',
     'chat',
+    'translate',
     'raisehand',
     'reactions',
     'participants-pane',

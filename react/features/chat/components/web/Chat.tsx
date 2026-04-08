@@ -633,7 +633,7 @@ function _mapStateToProps(state: IReduxState, _ownProps: any) {
         _isModal: window.innerWidth <= SMALL_WIDTH_THRESHOLD,
         _isOpen: isOpen,
         _isPollsEnabled: !arePollsDisabled(state),
-        _isCCTabEnabled: isCCTabEnabled(state),
+        _isCCTabEnabled: true,
         _isChatDisabled: isChatDisabled(state),
         _isFileSharingTabEnabled: isFileSharingEnabled(state),
         _focusedTab: getFocusedTab(state),

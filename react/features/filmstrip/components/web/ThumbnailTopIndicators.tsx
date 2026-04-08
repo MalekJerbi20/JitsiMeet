@@ -143,14 +143,7 @@ const ThumbnailTopIndicators = ({
             )}
         </div>
         <div className = { styles.container }>
-            <VideoMenuTriggerButton
-                hidePopover = { hidePopover }
-                local = { local }
-                participantId = { participantId }
-                popoverVisible = { popoverVisible }
-                showPopover = { showPopover }
-                thumbnailType = { thumbnailType }
-                visible = { isHovered } />
+ 
         </div>
     </>);
 };
