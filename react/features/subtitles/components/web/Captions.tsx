@@ -140,6 +140,7 @@ class Captions extends AbstractCaptions<IProps> {
 
         return (
             <div className = { classes.transcriptionSubtitles } >
+               <h1> Hello</h1>
                 { paragraphs }
             </div>
         );

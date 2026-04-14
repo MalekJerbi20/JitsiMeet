@@ -21,6 +21,14 @@ import { SubtitlesMessagesContainer } from './SubtitlesMessagesContainer';
  */
 const useStyles = makeStyles()(theme => {
     return {
+        customTitle: {
+            textAlign: 'center',
+            fontWeight: 'bold',
+            fontSize: '16px',
+            padding: '10px',
+            color: theme.palette.text01
+        },
+        
         subtitlesList: {
             display: 'flex',
             flexDirection: 'column',
@@ -47,7 +55,7 @@ const useStyles = makeStyles()(theme => {
         emptyContent: {
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             height: '100%',
             padding: '16px',
             boxSizing: 'border-box',
@@ -128,6 +136,7 @@ export default function ClosedCaptionsTab() {
         setButtonPressed(true);
     }, [ dispatch, isButtonPressed, setButtonPressed ]);
 
+    
     if (subtitlesError && isButtonPressed) {
         setButtonPressed(false);
     }
@@ -153,7 +162,19 @@ export default function ClosedCaptionsTab() {
         }
 
         return (
-            <div className = { classes.emptyContent }>
+            
+                <div className = { classes.emptyContent }>
+                <h6 style={{
+                      color: 'yellow',
+                      fontSize: '12px',
+                      fontWeight: 'bold',
+                      textAlign: 'center'
+                }}>
+                Functionalized Carbon Fiber Textile Reinforcements with Fiber-Based Strain Sensing
+                test
+                </h6>
+                 <p>test</p>
+                 <LanguageSelector />
                 <Icon
                     className = { classes.emptyIcon }
                     color = { theme.palette.icon03 }
@@ -170,8 +191,10 @@ export default function ClosedCaptionsTab() {
     }
 
     return (
+        
         <div className = { classes.container }>
             <LanguageSelector />
+            
             <div className = { classes.messagesContainer }>
                 <SubtitlesMessagesContainer
                     groups = { groupedSubtitles }

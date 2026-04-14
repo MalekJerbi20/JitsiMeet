@@ -87,7 +87,9 @@ function ChatHeader({ className, isCCTabEnabled, isPollsEnabled }: IProps) {
                 role = 'button'
                 src = { IconCloseLarge }
                 tabIndex = { 0 } />
+        
         </div>
+    
     );
 }
 

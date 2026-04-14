@@ -53,6 +53,7 @@ const LanguageSelectorDialog = (props: IAbstractLanguageSelectorDialogProps) => 
             cancel = {{ hidden: true }}
             ok = {{ hidden: true }}
             titleKey = 'transcribing.subtitles'>
+                <h1>Hello</h1>
             <p className = { styles.paragraphWrapper } >
                 {
                     translateToHTML(t, 'transcribing.sourceLanguageDesc', {

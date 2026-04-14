@@ -64,9 +64,10 @@ class ClosedCaptionButton
      */
     override _handleClickOpenLanguageSelector() {
         const { dispatch, _isCCTabEnabled } = this.props;
-
+         console.log("🔥 CC BUTTON CLICKED"); 
         if (_isCCTabEnabled) {
             dispatch(openCCPanel());
+            
         } else {
             dispatch(toggleLanguageSelectorDialog());
         }
