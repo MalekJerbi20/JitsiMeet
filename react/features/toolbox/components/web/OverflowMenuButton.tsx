@@ -26,7 +26,7 @@ import { showOverflowDrawer } from '../../functions.web';
 import Drawer from './Drawer';
 import JitsiPortal from './JitsiPortal';
 import OverflowToggleButton from './OverflowToggleButton';
-
+import { isLocalParticipantModerator } from '../../../base/participants/functions';
 /**
  * The type of the React {@code Component} props of {@link OverflowMenuButton}.
  */
@@ -114,6 +114,7 @@ const OverflowMenuButton = ({
     const overflowDrawer = useSelector(showOverflowDrawer);
     const reactionsQueue = useSelector(getReactionsQueue);
     const isGiphyVisible = useSelector(isGifsMenuOpen);
+    const isModerator = useSelector(isLocalParticipantModerator);
     const dispatch = useDispatch();
 
     const onCloseDialog = useCallback(() => {
@@ -200,7 +201,9 @@ const OverflowMenuButton = ({
                 </div>)
             }
         </ContextMenu>);
-
+     if (!isModerator) {
+        return null;
+    }
     if (overflowDrawer) {
         return (
             <div className = 'toolbox-button-wth-dialog context-menu'>

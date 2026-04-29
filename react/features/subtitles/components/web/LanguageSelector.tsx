@@ -78,7 +78,7 @@ function LanguageSelector() {
         if (value === 'transcribing.original') {
             value = null;
         }
-        dispatch(setRequestingSubtitles(true, true, value));
+        //dispatch(setRequestingSubtitles(true, true, "fr"));
 
         if (value !== null) {
             value = value.replace('translation-languages:', '');

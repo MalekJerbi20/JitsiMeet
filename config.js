@@ -1925,7 +1925,10 @@ var config = {
     //     maxFileSize: 50,
     // },
 };
-
+config.transcription = {
+    enabled: true,
+    autoCaptionOnTranscribe: true
+};
 // Set the default values for JaaS customers
 if (enableJaaS) {
     config.dialInNumbersUrl = 'https://conference-mapper.jitsi.net/v1/access/dids';

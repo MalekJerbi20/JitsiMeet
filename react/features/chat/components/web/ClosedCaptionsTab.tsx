@@ -13,7 +13,7 @@ import LanguageSelector from '../../../subtitles/components/web/LanguageSelector
 import { canStartSubtitles } from '../../../subtitles/functions.any';
 import { ISubtitle } from '../../../subtitles/types';
 import { isTranscribing } from '../../../transcribing/functions';
-
+import { isLocalParticipantModerator } from '../../../base/participants/functions';
 import { SubtitlesMessagesContainer } from './SubtitlesMessagesContainer';
 
 /**
@@ -96,7 +96,7 @@ export default function ClosedCaptionsTab() {
     const _canStartSubtitles = useSelector(canStartSubtitles);
     const [ isButtonPressed, setButtonPressed ] = useState(false);
     const subtitlesError = useSelector((state: IReduxState) => state['features/subtitles']._hasError);
-
+     const isModerator = useSelector(isLocalParticipantModerator);
     const filteredSubtitles = useMemo(() => {
         // First, create a map of transcription messages by message ID
         const transcriptionMessages = new Map(
@@ -104,7 +104,7 @@ export default function ClosedCaptionsTab() {
                 .filter(s => s.isTranscription)
                 .map(s => [ s.id, s ])
         );
-
+   
         if (!selectedLanguage) {
             // When no language is selected, show all original transcriptions
             return Array.from(transcriptionMessages.values());
@@ -145,6 +145,15 @@ export default function ClosedCaptionsTab() {
         if (_canStartSubtitles) {
             return (
                 <div className = { classes.emptyContent }>
+                  <h6 style={{
+                      color: 'yellow',
+                      fontSize: '12px',
+                      fontWeight: 'bold',
+                      textAlign: 'center'
+                    }}>
+                   Functionalized Carbon Fiber Textile Reinforcements with Fiber-Based Strain Sensing
+
+                  </h6>
                     <Button
                         accessibilityLabel = 'Start Closed Captions'
                         appearance = 'primary'
@@ -164,17 +173,7 @@ export default function ClosedCaptionsTab() {
         return (
             
                 <div className = { classes.emptyContent }>
-                <h6 style={{
-                      color: 'yellow',
-                      fontSize: '12px',
-                      fontWeight: 'bold',
-                      textAlign: 'center'
-                }}>
-                Functionalized Carbon Fiber Textile Reinforcements with Fiber-Based Strain Sensing
-                test
-                </h6>
-                 <p>test</p>
-                 <LanguageSelector />
+                          
                 <Icon
                     className = { classes.emptyIcon }
                     color = { theme.palette.icon03 }

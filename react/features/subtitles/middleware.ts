@@ -363,7 +363,8 @@ function _requestingSubtitlesChange(
                     dispatch(setRequestingSubtitles(false, false, null));
 
                     dispatch(showErrorNotification({
-                        titleKey: 'transcribing.failed'
+                       // titleKey: 'transcribing.failed'
+                          titleKey: 'test chamk'
                     }));
                     dispatch(setSubtitlesError(true));
                 });
