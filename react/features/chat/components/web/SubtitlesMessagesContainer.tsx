@@ -141,6 +141,10 @@ export function SubtitlesMessagesContainer({ messages, groups }: IProps) {
                         messages = { group.messages }
                         senderId = { group.senderId } />
                 ))}
+
+                   
+
+
                 { !isScrolledToBottom && hasNewMessages && (
                     <NewMessagesButton
                         onGoToFirstUnreadMessage = { handleNewMessagesClick } />

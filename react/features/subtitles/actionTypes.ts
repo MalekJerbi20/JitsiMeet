@@ -70,3 +70,6 @@ export const STORE_SUBTITLE = 'STORE_SUBTITLE';
  * }
  */
 export const SET_SUBTITLES_ERROR = 'SET_SUBTITLES_ERROR';
+
+export const SET_SUBTITLE = 'SET_SUBTITLE';
+

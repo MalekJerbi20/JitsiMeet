@@ -21,6 +21,7 @@ const defaultState = {
     _transcriptMessages: new Map(),
     _requestingSubtitles: false,
     _language: null,
+    /*_audio: {},*/
     messages: [],
     subtitlesHistory: [],
     _hasError: false
@@ -33,8 +34,10 @@ export interface ISubtitlesState {
     _language: string | null;
     _requestingSubtitles: boolean;
     _transcriptMessages: Map<string, ITranscriptMessage>;
+    /*_audio: Record<string, string>;*/
     messages: ITranscriptMessage[];
     subtitlesHistory: Array<ISubtitle>;
+    
 }
 
 /**
@@ -69,30 +72,41 @@ ReducerRegistry.register<ISubtitlesState>('features/subtitles', (
             ...state,
             ...defaultState
         };
-    case STORE_SUBTITLE: {
-        const existingIndex = state.subtitlesHistory.findIndex(
-            subtitle => subtitle.id === action.subtitle.id
-        );
+   case STORE_SUBTITLE: {
+    const existingIndex = state.subtitlesHistory.findIndex(
+        subtitle => subtitle.id === action.subtitle.id
+        
+    );
+        console.log("REDUCER RECEIVED:", action.subtitle);
+    // build new subtitle object with audio_paths
+    const newSubtitle: ISubtitle = {
+        ...action.subtitle,
+        audio_paths: action.subtitle.audio_paths  // Ensure audio_paths is always defined, even if empty
+    };
+    
 
-        if (existingIndex >= 0 && state.subtitlesHistory[existingIndex].interim) {
-            const newHistory = [ ...state.subtitlesHistory ];
-
-            newHistory[existingIndex] = action.subtitle;
-
-            return {
-                ...state,
-                subtitlesHistory: newHistory
-            };
+    const newState = existingIndex >= 0 /*&& state.subtitlesHistory[existingIndex].interim*/
+        ? {
+            ...state,
+            subtitlesHistory: state.subtitlesHistory.map((s, i) =>
+                i === existingIndex
+                    ? { ...s, ...newSubtitle }
+                    : s //it was action.subtitle before, but we need to update it with newSubtitle which has audio_paths
+            )
         }
-
-        return {
+        : {
             ...state,
             subtitlesHistory: [
                 ...state.subtitlesHistory,
-                action.subtitle
+                newSubtitle // action.subtitle was here before, but we need to add newSubtitle which has audio_paths
             ]
         };
-    }
+
+    return {
+        ...newState,
+        /*_audio: { [action.subtitle.language || 'default']: action.subtitle.audio || '' }*/
+    };
+}
     case SET_SUBTITLES_ERROR:
         return {
             ...state,

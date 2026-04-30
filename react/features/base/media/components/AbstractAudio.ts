@@ -108,10 +108,19 @@ export default class AbstractAudio extends Component<IProps> {
      * @returns {void}
      */
     setSinkId(sinkId: string) {
-        this._audioElementImpl
-            && typeof this._audioElementImpl.setSinkId === 'function'
-            && this._audioElementImpl.setSinkId(sinkId)
-                .catch(error => logger.error('Error setting sink', error));
+        const audioElement = this._audioElementImpl;
+
+        if (!audioElement || typeof audioElement.setSinkId !== 'function') {
+            return;
+        }
+
+        if (typeof document !== 'undefined' && audioElement instanceof HTMLElement
+                && !document.contains(audioElement)) {
+            return;
+        }
+
+        audioElement.setSinkId(sinkId)
+            .catch(error => logger.error('Error setting sink', error));
     }
 
     /**

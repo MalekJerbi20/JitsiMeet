@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
@@ -95,6 +95,7 @@ export default function ClosedCaptionsTab() {
     const _isTranscribing = useSelector(isTranscribing);
     const _canStartSubtitles = useSelector(canStartSubtitles);
     const [ isButtonPressed, setButtonPressed ] = useState(false);
+    const audioRef = useRef<HTMLAudioElement>(null);
     const subtitlesError = useSelector((state: IReduxState) => state['features/subtitles']._hasError);
      const isModerator = useSelector(isLocalParticipantModerator);
     const filteredSubtitles = useMemo(() => {
@@ -136,10 +137,9 @@ export default function ClosedCaptionsTab() {
         setButtonPressed(true);
     }, [ dispatch, isButtonPressed, setButtonPressed ]);
 
-    
-    if (subtitlesError && isButtonPressed) {
-        setButtonPressed(false);
-    }
+    const playSound = useCallback(() => {
+        audioRef.current?.play()?.catch(err => console.error('Audio play failed', err));
+    }, []);
 
     if (!_isTranscribing) {
         if (_canStartSubtitles) {
@@ -177,9 +177,19 @@ export default function ClosedCaptionsTab() {
                 <Icon
                     className = { classes.emptyIcon }
                     color = { theme.palette.icon03 }
-                    src = { IconSubtitles } />
+                    src = { IconSubtitles }/>
                 <span className = { classes.emptyState }>
-                    { t('closedCaptionsTab.emptyState') }
+                    { ('Malek : Hallo, wie geht’s , ich verwende Fasern und ich mag das Faserverfahren. ') }
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <button style={{ backgroundColor: 'yellow', color: 'black' }} onClick={playSound}>Translated Audio</button>
+                    </div>
+                    
+                    <audio
+                        ref = { audioRef }
+                        preload = 'auto'
+                        src = 'sounds/sound.wav'>
+                        <source src = 'sounds/sound.wav' type = 'audio/wav' />
+                    </audio>
                 </span>
             </div>
         );
@@ -190,15 +200,25 @@ export default function ClosedCaptionsTab() {
     }
 
     return (
+                
         
         <div className = { classes.container }>
-            <LanguageSelector />
-            
+            <h3>Session-01</h3>
+           <LanguageSelector / >  
+           
+    
             <div className = { classes.messagesContainer }>
+                
                 <SubtitlesMessagesContainer
                     groups = { groupedSubtitles }
-                    messages = { filteredSubtitles } />
+                    messages = { filteredSubtitles } 
+                    
+                    /> 
+                            
+                                    
             </div>
+            
         </div>
+        
     );
 }

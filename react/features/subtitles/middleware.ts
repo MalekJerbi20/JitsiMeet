@@ -235,7 +235,8 @@ function _endpointMessageReceived(store: IStore, next: Function, action: AnyActi
             text,
             interim: isInterim,
             timestamp,
-            isTranscription: true
+            isTranscription: true,
+            audio_paths: json.audio_paths || {}
         };
 
         if (isCCTabEnabled(state)) {
