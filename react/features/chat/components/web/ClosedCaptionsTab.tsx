@@ -178,19 +178,7 @@ export default function ClosedCaptionsTab() {
                     className = { classes.emptyIcon }
                     color = { theme.palette.icon03 }
                     src = { IconSubtitles }/>
-                <span className = { classes.emptyState }>
-                    { ('Malek : Hallo, wie geht’s , ich verwende Fasern und ich mag das Faserverfahren. ') }
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <button style={{ backgroundColor: 'yellow', color: 'black' }} onClick={playSound}>Translated Audio</button>
-                    </div>
-                    
-                    <audio
-                        ref = { audioRef }
-                        preload = 'auto'
-                        src = 'sounds/sound.wav'>
-                        <source src = 'sounds/sound.wav' type = 'audio/wav' />
-                    </audio>
-                </span>
+                <span className = { classes.emptyState }></span>
             </div>
         );
     }
@@ -205,9 +193,8 @@ export default function ClosedCaptionsTab() {
         <div className = { classes.container }>
             <h3>Session-01</h3>
            <LanguageSelector / >  
-           
-    
-            <div className = { classes.messagesContainer }>
+                    
+                       <div className = { classes.messagesContainer }>
                 
                 <SubtitlesMessagesContainer
                     groups = { groupedSubtitles }
@@ -217,6 +204,7 @@ export default function ClosedCaptionsTab() {
                             
                                     
             </div>
+            
             
         </div>
         

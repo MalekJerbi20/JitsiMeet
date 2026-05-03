@@ -21,7 +21,6 @@ const defaultState = {
     _transcriptMessages: new Map(),
     _requestingSubtitles: false,
     _language: null,
-    /*_audio: {},*/
     messages: [],
     subtitlesHistory: [],
     _hasError: false
@@ -34,7 +33,6 @@ export interface ISubtitlesState {
     _language: string | null;
     _requestingSubtitles: boolean;
     _transcriptMessages: Map<string, ITranscriptMessage>;
-    /*_audio: Record<string, string>;*/
     messages: ITranscriptMessage[];
     subtitlesHistory: Array<ISubtitle>;
     

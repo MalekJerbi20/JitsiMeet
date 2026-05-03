@@ -68,31 +68,32 @@ const useStyles = makeStyles()(theme => {
 });
 
 
-function PlayAudioButton({ audioPath }: { audioPath?: string }) {
+function PlayAudioButton({ text }: { text: string }) {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const [playing, setPlaying] = useState(false);
 
-    const handlePlay = () => {
-        if (!audioPath) return;
+    // Extract just the caption text without participant name
+    const cleanText = text.includes(': ') ? text.split(': ').slice(1).join(': ') : text;
+    
+    // Call /tts endpoint directly with the caption text
+    const audioUrl = `/tts?text=${encodeURIComponent(cleanText)}&lang=de`;
 
+    const handlePlay = () => {
         if (audioRef.current) {
             audioRef.current.pause();
             audioRef.current = null;
             setPlaying(false);
             return;
         }
-
-        const audio = new Audio(audioPath);
+        const audio = new Audio(audioUrl);
         audioRef.current = audio;
-
         audio.onended = () => {
             audioRef.current = null;
             setPlaying(false);
         };
-
         audio.play()
             .then(() => setPlaying(true))
-            .catch(e => console.warn("Audio failed:", e));
+            .catch(e => console.warn('Audio failed:', e));
     };
 
     return (
@@ -130,7 +131,13 @@ export default function SubtitleMessage({ participantId, text, timestamp, interi
                     {new Date(timestamp).toLocaleTimeString()}
                 </div>
                 {!interim && text && (
-                    <PlayAudioButton audioPath={audio_paths?.en} />
+                    <>
+                    <PlayAudioButton text={text}/>
+                   
+                    </>
+                     //<audio controls src="/audio/translated_session.wav"></audio>
+                    //<PlayAudioButton audioPath="/audio/original_session.wav" />
+                        //<PlayAudioButton audioPath="/audio/translated_session.wav" />
                     
                 )}
                 

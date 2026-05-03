@@ -159,7 +159,9 @@ function _endpointMessageReceived(store: IStore, next: Function, action: AnyActi
                 interim: false,
                 isTranscription: false,
                 timestamp,
-                id: transcriptMessageID
+                id: transcriptMessageID,
+                audio_paths: json.audio_paths || {}, //added this 
+                translations: json.translations || {} // added this
             }));
 
             return next(action);
@@ -236,7 +238,11 @@ function _endpointMessageReceived(store: IStore, next: Function, action: AnyActi
             interim: isInterim,
             timestamp,
             isTranscription: true,
-            audio_paths: json.audio_paths || {}
+            translations: json.translations, //added this 
+            audio_paths: json.audio_paths || {
+                original: "/audio/original_session.wav",
+                translated: "/audio/translated_session.wav"
+                } // added this
         };
 
         if (isCCTabEnabled(state)) {
