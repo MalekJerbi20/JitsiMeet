@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
-
 import { getParticipantDisplayName } from '../../../base/participants/functions';
 import { ISubtitle } from '../../../subtitles/types';
 import { useState } from 'react';
+import React, { useRef } from 'react';
+
+
 
 /**
  * Props for the SubtitleMessage component.
@@ -68,40 +69,7 @@ const useStyles = makeStyles()(theme => {
 });
 
 
-function PlayAudioButton({ text }: { text: string }) {
-    const audioRef = useRef<HTMLAudioElement | null>(null);
-    const [playing, setPlaying] = useState(false);
 
-    // Extract just the caption text without participant name
-    const cleanText = text.includes(': ') ? text.split(': ').slice(1).join(': ') : text;
-    
-    // Call /tts endpoint directly with the caption text
-    const audioUrl = `/tts?text=${encodeURIComponent(cleanText)}&lang=de`;
-
-    const handlePlay = () => {
-        if (audioRef.current) {
-            audioRef.current.pause();
-            audioRef.current = null;
-            setPlaying(false);
-            return;
-        }
-        const audio = new Audio(audioUrl);
-        audioRef.current = audio;
-        audio.onended = () => {
-            audioRef.current = null;
-            setPlaying(false);
-        };
-        audio.play()
-            .then(() => setPlaying(true))
-            .catch(e => console.warn('Audio failed:', e));
-    };
-
-    return (
-        <button onClick={handlePlay}>
-            {playing ? '⏹ Stop' : '🔊 Play'}
-        </button>
-    );
-}
 
 /**
  * Component that renders a single subtitle message with the participant's name,
@@ -110,11 +78,11 @@ function PlayAudioButton({ text }: { text: string }) {
  * @param {IProps} props - The component props.
  * @returns {JSX.Element} - The rendered subtitle message.
  */
-export default function SubtitleMessage({ participantId, text, timestamp, interim, showDisplayName, audio_paths }: IProps) {
+export default function SubtitleMessage({ participantId, text, timestamp, interim, showDisplayName, url }: IProps) {
     const { classes } = useStyles();
     const participantName = useSelector((state: any) =>
         getParticipantDisplayName(state, participantId));
-    console.log("audio_paths:", audio_paths);
+    //console.log("audio_paths:", audio_paths);
 
     return (
         <div className = { `${classes.messageContainer} ${interim ? classes.interim : ''}` }>
@@ -132,13 +100,14 @@ export default function SubtitleMessage({ participantId, text, timestamp, interi
                 </div>
                 {!interim && text && (
                     <>
-                    <PlayAudioButton text={text}/>
-                   
-                    </>
-                     //<audio controls src="/audio/translated_session.wav"></audio>
-                    //<PlayAudioButton audioPath="/audio/original_session.wav" />
-                        //<PlayAudioButton audioPath="/audio/translated_session.wav" />
-                    
+                    <audio controls src={`${url}`}
+                        style={{
+                        height: '30px',
+                        width: '200px',
+                        marginTop: '4px'
+                        }}
+                        />
+                    </>   
                 )}
                 
             </div>
